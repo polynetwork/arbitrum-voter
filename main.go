@@ -73,11 +73,15 @@ func main() {
 	if err != nil {
 		log.Fatalf("polySdk.OpenWallet failed: %v", err)
 	}
-	fmt.Print("Enter Password: ")
-	pass, err := gopass.GetPasswd()
-	if err != nil {
-		log.Fatalf("gopass.GetPasswd failed: %v", err)
+	pass := []byte(conf.PolyConfig.WalletPwd)
+	if len(pass) == 0 {
+		fmt.Print("Enter Password: ")
+		pass, err = gopass.GetPasswd()
+		if err != nil {
+			log.Fatalf("gopass.GetPasswd failed: %v", err)
+		}
 	}
+
 	signer, err := wallet.GetDefaultAccount(pass)
 	if err != nil {
 		log.Fatalf("wallet.GetDefaultAccount failed: %v", err)

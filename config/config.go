@@ -49,6 +49,7 @@ func (c *Config) IsWhitelistMethod(method string) bool {
 type PolyConfig struct {
 	RestURL    string
 	WalletFile string
+	WalletPwd  string
 }
 
 type ArbConfig struct {
